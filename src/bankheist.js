@@ -11,6 +11,15 @@ function playSound(name, volume){
     sound.play();     
     return sound
 }
+const ARRANGEMENT =
+[
+  [1,1],[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],
+  [1,7],[1,8],[2,5],[2,5],[2,6],[2,6],[2,7],
+  [2,7],[2,8],[2,8],[3,6],[3,6],[3,7],[3,7],
+  [3,8],[3,8],[4,7],[4,7],[4,8],[4,8],[4,8],
+  [4,8],[4,8],[4,8],[4,8],[4,8]
+]
+
 
 $("#startButton").on( "click", function() {
   start();
@@ -73,14 +82,31 @@ async function startHack()
   var tab = [];
   var q_amount = $("#question").val();
   var shrinking_time = $("#shrinking").val();
-  var inARow = $("#inARow").val();
-  for(var i=0;i<tileAmount;i++)
-  {
-    tab.push([i+1,createTile(tileAmount)]);
-  }
-  tab = shuffleArray(tab);
-  createTiles(tab,tileAmount,inARow);
+  var inARow = ARRANGEMENT[tileAmount][1]//$("#inARow").val();
+  var sizeOfTile = 1.0;//parseFloat($("#tileSize").val());
+  //kolejny input SIZE pamietaj odkomentowac w index.html
+  // if(sizeOfTile==1.0)
+  // sizeOfTile = 0.8;
+  // else if(sizeOfTile==2.0)
+  // sizeOfTile = 0.9;
+  // else if(sizeOfTile==3.0)
+  // sizeOfTile = 1.0;
+  //jesli nie ma input SIZE
   
+  if(inARow>7)
+    sizeOfTile=0.9;
+    if(inARow>8)
+    sizeOfTile=0.8;
+  //
+  var boxCss =`<style>.boxHack{width:`+String(parseInt(220*sizeOfTile))+`px; height:`+String(parseInt(220*sizeOfTile))+`px;} </style>`;
+  $('head').append(boxCss);
+    for(var i=0;i<tileAmount;i++)
+    {
+      tab.push([i+1,createTile(tileAmount)]);
+    }
+    tab = shuffleArray(tab);
+    createTiles(tab,tileAmount,inARow);
+    //zmiana rozmiaru kafelka
   await displayTilesShrinking(tileAmount,shrinking_time);
   showMenu();
   $("#answer").focus();
