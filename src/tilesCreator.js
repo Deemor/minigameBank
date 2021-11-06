@@ -1,5 +1,4 @@
-export function createTiles(tab, tileAmount){
-    var columns = 6;
+export function createTiles(tab, tileAmount, columns){
     $('#tileContainer').empty();
     var createdTiles = 0;
     var createdRows = 0;

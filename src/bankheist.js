@@ -73,12 +73,13 @@ async function startHack()
   var tab = [];
   var q_amount = $("#question").val();
   var shrinking_time = $("#shrinking").val();
+  var inARow = $("#inARow").val();
   for(var i=0;i<tileAmount;i++)
   {
     tab.push([i+1,createTile(tileAmount)]);
   }
   tab = shuffleArray(tab);
-  createTiles(tab,tileAmount);
+  createTiles(tab,tileAmount,inARow);
   
   await displayTilesShrinking(tileAmount,shrinking_time);
   showMenu();
