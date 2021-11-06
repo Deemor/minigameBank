@@ -4,9 +4,7 @@ Próba jak najwierniejszego odtworzenia oraz rozszerzenia minigry włamania do b
 
 ## - - Kliknij screena poniżej, aby to wypróbować! - - 
 
-![bank](https://user-images.githubusercontent.com/90990679/140612277-ef2d8312-091e-46b7-8acb-870de6c832f4.png)
-
-
+[![bank](https://user-images.githubusercontent.com/90990679/140612277-ef2d8312-091e-46b7-8acb-870de6c832f4.png)](https://deemor.github.io/minigameBank/)
 
 # Wspierane przeglądarki
 Testowane na: Firefox, Chrome.
