@@ -72,6 +72,13 @@
 				</p>
 				<input type="range" class="form-range" min="1.5" max="6" step="0.5" id="shrinking" oninput="shrinkingChange()">
 			</div>
+			<div class="col w-25">
+				<p class="h5 d-flex justify-content-left mt-2 mb-2" style="color:#33da6a;">
+					Liczba prób	&nbsp;&nbsp;
+					<span class="badge bg-success" id="attemptsBadge">x</span>
+				</p>
+				<input type="range" class="form-range" min="3" max="8" step="1" id="attempts" oninput="attemptsChange()">
+			</div>
 			<!-- <div class="col w-25">
 				<p class="h5 d-flex justify-content-left mt-2 mb-2" style="color:#33da6a;">
 					Max. ilosc rzedzie	&nbsp;&nbsp;
@@ -94,6 +101,7 @@
 		var default_value = 5;
 		var default_question = 2;
 		var default_shrinking = 1.5;
+		var default_attempts = 3;
 		
 		
 		document.getElementById("timeBadge").innerHTML=String(default_time);
@@ -104,6 +112,9 @@
 		document.getElementById("question").value=default_question;
 		document.getElementById("shrinkingBadge").innerHTML=String(default_shrinking);
 		document.getElementById("shrinking").value=default_shrinking;
+		
+		document.getElementById("attemptsBadge").innerHTML=String(default_attempts);
+		document.getElementById("attempts").value=default_attempts;
 		
 		
 
@@ -118,6 +129,9 @@
 		}
 		function shrinkingChange(){
 			document.getElementById("shrinkingBadge").innerHTML=document.getElementById("shrinking").value;
+		}
+		function attemptsChange(){
+			document.getElementById("attemptsBadge").innerHTML=document.getElementById("attempts").value;
 		}
 		// var default_inARow = 6;
 		// document.getElementById("inARowBadge").innerHTML=String(default_inARow);
