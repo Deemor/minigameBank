@@ -43,6 +43,10 @@
 	<script type="module" src="src/bankheist.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<div class="container-fluid mt-1 align-left mb-0" id="settings" style="font-family: 'Nanum Gothic Coding';position:absolute; bottom:0">
+		<p class="h2" style="color:#33da6a;">Presets:</p>
+		<button type="button" class="btn btn-success btn-lg" id="startButton" onClick='setPreset(7,5,2,1.5,3)'>BANK</button>
+		<button type="button" class="btn btn-success btn-lg" id="startButton" onClick='setPreset(15,6,2,1.5,3)'>PACYFIK GORA</button>
+		<button type="button" class="btn btn-success btn-lg" id="startButton" onClick='setPreset(18,8,2,1.5,5)'>PACYFIK DOL</button>
 		<div class="row w-100">
 			<div class="col w-25">
 				<p class="h5 d-flex justify-content-left mt-2 mb-2" style="color:#33da6a;">
@@ -112,7 +116,6 @@
 		document.getElementById("question").value=default_question;
 		document.getElementById("shrinkingBadge").innerHTML=String(default_shrinking);
 		document.getElementById("shrinking").value=default_shrinking;
-		
 		document.getElementById("attemptsBadge").innerHTML=String(default_attempts);
 		document.getElementById("attempts").value=default_attempts;
 		
@@ -146,6 +149,19 @@
 		// function tileSizeChange(){
 		// 	document.getElementById("tileSizeBadge").innerHTML=document.getElementById("tileSize").value;
 		// }
+		function setPreset(time,amount,questions,shrinking,attempts)
+		{
+			document.getElementById("timeBadge").innerHTML=String(time);
+			document.getElementById("time").value=time;
+			document.getElementById("amountBadge").innerHTML=String(amount);
+			document.getElementById("amount").value=amount;
+			document.getElementById("questionBadge").innerHTML=String(questions);
+			document.getElementById("question").value=questions;
+			document.getElementById("shrinkingBadge").innerHTML=String(shrinking);
+			document.getElementById("shrinking").value=shrinking;
+			document.getElementById("attemptsBadge").innerHTML=String(attempts);
+			document.getElementById("attempts").value=attempts;
+		}
 	</script>
   </body>
 </html>

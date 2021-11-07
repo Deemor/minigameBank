@@ -99,7 +99,7 @@ async function startHack()
     if(inARow>8)
     sizeOfTile=0.8;
   //
-  var boxCss =`<style>.boxHack{width:`+String(parseInt(220*sizeOfTile))+`px; height:`+String(parseInt(220*sizeOfTile))+`px;} </style>`;
+  var boxCss =`<style>.boxHack{width:`+String(parseInt(300*sizeOfTile))+`px; height:`+String(parseInt(300*sizeOfTile))+`px;} </style>`;
   $('head').append(boxCss);
     for(var i=0;i<tileAmount;i++)
     {
@@ -198,7 +198,7 @@ async function displayTilesShrinking(amount, shrinking_time){
       }
     )
   }
-  await delay(shrinking_time)
+  await delay(1.5)
   for(var i=0;i<amount;i++)
   {
     $("#b"+String(i+1)).children().remove()
