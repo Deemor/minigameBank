@@ -27,6 +27,7 @@ $("#startButton").on( "click", function() {
 
 
 async function start(){
+  var attempt_amount = $("#attempts").val();
   hideSettings();
   hideGame();
   setTerminalText('Laczenie z terminalem...')
@@ -35,7 +36,7 @@ async function start(){
   await delay(1.5)
   hideTerminal();
   var result = true;
-  for(var i=0;i<3;i++)
+  for(var i=0;i<attempt_amount;i++)
   {
     var answer = await startHack();
     if(answer[0]==true)
