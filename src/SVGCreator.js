@@ -25,7 +25,7 @@ const SHAPE_SVG = {
 
 var createTextSVG = (text, size, weight, color, x, y, font) => `
 <text 
-    stroke="grey" 
+    stroke="white" 
     fill="${color}" 
     stroke-width="1" 
     style="font-size:${size}px;" 
