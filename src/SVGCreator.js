@@ -1,7 +1,7 @@
 export function getTileSVG(Tile){
     
     const textSize = 22
-    const textWeigth = '700'
+    const textWeigth = '720'
     const textColor = Tile.colors['text'][1]
 
     const backgroundShapeSVG = '<rect fill=' + Tile.colors['background'][1]+ ' stroke-width="1" width="220" height="220"class="shadow"/>'
@@ -18,9 +18,9 @@ const createShapeSVG = (shape, color) => SHAPE_SVG[shape](color)
 
 const SHAPE_SVG = {
     "kwadrat" : (s) => `<rect stroke="#ffffff" fill=${s} stroke-width="1" width="160" height="160" x="30" y="30" class="shadow"/>`, 
-    "trojkat": (s) => `<polygon stroke="#ffffff" fill=${s} stroke-width="1" points="30 190 110 30 190 190 190 190" class="shadow"/>`, 
+    "trojkat": (s) => `<polygon stroke="#ffffff" fill=${s} stroke-width="1" points="10 210 110 10 210 210 210 210" class="shadow"/>`, 
     "prostokat" : (s) =>`<rect stroke="#ffffff" fill=${s} stroke-width="1" class="shape shadow" width="180" height="110" x="20" y="55"/>`, 
-    "kolo" : (s) => `<circle stroke="#ffffff" fill=${s} stroke-width="1" cx="110" cy="110" r="80" class="shadow"/>`,
+    "kolo" : (s) => `<circle stroke="#ffffff" fill=${s} stroke-width="1" cx="110" cy="110" r="95" class="shadow"/>`,
 }
 
 var createTextSVG = (text, size, weight, color, x, y, font) => `
