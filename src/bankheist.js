@@ -13,21 +13,19 @@ function playSound(name, volume){
 }
 const ARRANGEMENT =
 [
-  [1,1],[1,1],[1,2],[1,3],[1,4],[1,5],[2,3],
-  [1,7],[2,4],[2,5],[2,5],[2,6],[2,6],[2,7],
-  [2,7],[2,8],[2,8],[3,6],[3,6],[3,7],[3,7],
-  [3,8],[3,8],[4,7],[4,7],[4,8],[4,8],[4,8],
-  [4,8],[4,8],[4,8],[4,8],[4,8]
+  [1],
+  [1],[2],[3],[4],[5],[3,3],[7],[4,4],[5,4],[5,5],//10
+  [6,5],[6,6],[7,6],[7,7],[6,5,4],[6,5,5],[6,6,5],[6,6,6],[7,6,6],[7,7,6],//20
+  [7,7,7],//21
 ]
-
 
 $("#startButton").on( "click", function() {
   start();
 });
 
-
 async function start(){
   var attempt_amount = $("#attempts").val();
+  hideCorrectAnswerButton();
   hideSettings();
   hideGame();
   setTerminalText('Laczenie z terminalem...')
@@ -36,9 +34,10 @@ async function start(){
   await delay(1.5)
   hideTerminal();
   var result = true;
+  var answer;
   for(var i=0;i<attempt_amount;i++)
   {
-    var answer = await startHack();
+    answer = await startHack();
     if(answer[0]==true)
     {
       console.log("your answer:" + answer[1]);
@@ -63,18 +62,22 @@ async function start(){
   else
   {
     setTerminalText('CONNECTION FAILED');
+    //ZAPISANIE DANYCH DO MODAL Z PODSUMOWANIEM
+    $('#modalAnswer').html(String(answer[0] == true ? answer[1].toUpperCase() : "BRAK"));
+    //
     var restartButton = '<button type="button" class="btn btn-primary btn-lg" id="restartButton">Failed. Try again</button>';
   }
-      await delay(1.5);
+  await delay(1.5);
   
   $('#terminalText').empty().append(restartButton);
   showSettings();
+  if(!result)
+    showCorrectAnswerButton();
   $("#restartButton").on( "click", function() {
     start();
   });
 }
-async function startHack()
-{
+async function startHack(){
   showGame();
   hideMenu();
   $("#answer").val("");
@@ -83,39 +86,40 @@ async function startHack()
   var tab = [];
   var q_amount = $("#question").val();
   var shrinking_time = $("#shrinking").val();
-  var inARow = ARRANGEMENT[tileAmount][1]//$("#inARow").val();
-  var sizeOfTile = 1.0;//parseFloat($("#tileSize").val());
-  //kolejny input SIZE pamietaj odkomentowac w index.html
-  // if(sizeOfTile==1.0)
-  // sizeOfTile = 0.8;
-  // else if(sizeOfTile==2.0)
-  // sizeOfTile = 0.9;
-  // else if(sizeOfTile==3.0)
-  // sizeOfTile = 1.0;
-  //jesli nie ma input SIZE
-  
-  if(inARow>7)
-    sizeOfTile=0.9;
-    if(inARow>8)
-    sizeOfTile=0.8;
-  //
-  var boxCss =`<style>.boxHack{width:`+String(parseInt(300*sizeOfTile))+`px; height:`+String(parseInt(300*sizeOfTile))+`px;} </style>`;
-  $('head').append(boxCss);
-    for(var i=0;i<tileAmount;i++)
-    {
-      tab.push([i+1,createTile(tileAmount)]);
-    }
-    tab = shuffleArray(tab);
-    createTiles(tab,tileAmount,inARow);
-    //zmiana rozmiaru kafelka
+
+  for(var i=0;i<tileAmount;i++)
+  {
+    tab.push([i+1,createTile(tileAmount)]);
+  }
+  tab = shuffleArray(tab);
+  createTiles(tab,tileAmount);
+  //zmiana rozmiaru kafelka (animacja zmniejszania sie kafelkow)
   await displayTilesShrinking(tileAmount,shrinking_time);
   showMenu();
   $("#answer").focus();
   var questionAndAnswer = createQuestion(tileAmount,q_amount,tab);
+  //ZAPISANIE DANYCH DO MODAL Z PODSUMOWANIEM
+  var modalSequence = "";
+  {
+    var z = 0;
+    for(var i = 0; i < ARRANGEMENT[tileAmount].length;i++)
+    {
+      for(var j = 0; j < ARRANGEMENT[tileAmount][i];j++)
+      {
+        modalSequence += " "+ String(tab[z][0]);
+        z++;
+      }
+      modalSequence += "<br/>";
+    }
+  }
+  $("#modalSequence").html(modalSequence);
+  $("#modalHint").html(questionAndAnswer[0].toUpperCase());
+  $("#modalCorrectAnswer").html(questionAndAnswer[1].toUpperCase());
+  // 
   $("#hint").html(questionAndAnswer[0].toUpperCase());
   console.log(questionAndAnswer);//pytanie oraz odpowiedz na konsoli:)
   await displayTilesSVG(tileAmount,tab);
-
+  
   const timer_sound = (time <= 7) ? playSound('audio/timer_sound.mp3') : playSound('audio/timer_sound_long.mp3');
   var progBar = $("#progress-bar");
   progBar.css("width","100%");
@@ -141,6 +145,14 @@ async function startHack()
     output([false]);
   });
 
+}
+function showCorrectAnswerButton()
+{
+  $("#correctAnswerButton").show();
+}
+function hideCorrectAnswerButton()
+{
+  $("#correctAnswerButton").hide();
 }
 function setTerminalText(text)
 {
@@ -209,4 +221,5 @@ async function displayTilesSVG(amount, tab){
   {
     $("#b"+String(i+1)).html(getTileSVG(tab[i][1]));
   }
+  $("#modalTiles").html($("#tileContainer").html());
 }

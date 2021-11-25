@@ -7,14 +7,10 @@
     color: #33da6a;
     opacity: 0.6; 
 }
-/* .boxHack
-{
-    width:210px; 
-    height:210px;
-} */
+
 .boxHackTextLoading
 {
-    font-size: 60px;
+    font-size: 80px;
     color:#33da6a;
 }
 .shadow {
@@ -25,3 +21,21 @@
 #menu{
     display:none;
 }  
+.boxHack
+{
+    width: 220px;
+    height: 220px;
+    margin-right:30px;
+    margin-top:25px;
+    border-color: #5fcb82;
+    border-style: solid;
+    border-width: 3px;
+}
+.tileRow .boxHack:last-child
+{
+    margin-right:0px;
+}
+#tileContainer .tileRow.first-child
+{
+    margin-top:0px;
+}
