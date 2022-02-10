@@ -1,7 +1,7 @@
 export function getTileSVG(Tile){
     
     const textSize = 22
-    const textWeigth = '720'
+    const textWeigth = '800'
     const textColor = Tile.colors['text'][1]
 
     const backgroundShapeSVG = '<rect fill=' + Tile.colors['background'][1]+ ' stroke-width="1" width="220" height="220"class="shadow"/>'
