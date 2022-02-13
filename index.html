@@ -36,7 +36,7 @@
 			</svg>
 		</div>
 		<div class="text-success mx-5 text-center align-middle fw-bold" id="heistDrinkMessage" style="display:none;">
-			Nałożono efekt Heist Drink
+			Nałożono efekt Heist Drink (+50% czasu)
 		</div>
 		
 			<div class="row w-100 px-4">
@@ -169,7 +169,7 @@
 			$("#heistDrink").hide();
 			$("#heistDrinkMessage").show();
 			var time = document.getElementById("time").value * 1.5;
-			document.getElementById("timeBadge").innerHTML=String(time);
+			document.getElementById("timeBadge").innerHTML=String(time) + ' (+heist drink boost)';
 			document.getElementById("time").value=time;
 		}
 	</script>
